@@ -3,7 +3,7 @@
 A lightweight localization framework for Unity editor scripts.
 
 ```sh
-$ npm install rotorz/unity3d-localized-strings
+$ npm install --save rotorz/unity3d-localized-strings
 ```
 
 This package is compatible with [unity3d-package-syncer](https://github.com/rotorz/unity3d-package-syncer).
