@@ -2,6 +2,8 @@
     "name": "rotorz.unity3d-localized-strings.editor",
     "references": [
         "rotorz.dotnet-exception-utils",
-        "rotorz.dotnet-localized-strings"
+        "rotorz.dotnet-type-utils",
+        "rotorz.dotnet-localized-strings",
+        "rotorz.unity3d-package-utils.editor"
     ]
 }

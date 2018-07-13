@@ -18,6 +18,8 @@
   ],
   "dependencies": {
     "@rotorz/dotnet-exception-utils": "github:rotorz/dotnet-exception-utils#semver:^1.0.3",
-    "@rotorz/dotnet-localized-strings": "github:rotorz/dotnet-localized-strings#semver:^1.0.1"
+    "@rotorz/dotnet-type-utils": "github:rotorz/dotnet-type-utils#semver:^1.0.2",
+    "@rotorz/dotnet-localized-strings": "github:rotorz/dotnet-localized-strings#semver:^1.0.1",
+    "@rotorz/unity3d-package-utils": "github:rotorz/unity3d-package-utils#semver:^1.0.1"
   }
 }
