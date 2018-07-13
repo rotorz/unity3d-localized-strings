@@ -5,5 +5,11 @@
         "rotorz.dotnet-type-utils",
         "rotorz.dotnet-localized-strings",
         "rotorz.unity3d-package-utils.editor"
-    ]
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
 }
