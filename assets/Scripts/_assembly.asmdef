@@ -1,0 +1,12 @@
+{
+    "name": "rotorz.unity3d-localized-strings",
+    "references": [
+        "rotorz.dotnet-exception-utils",
+        "rotorz.dotnet-type-utils",
+        "rotorz.dotnet-localized-strings"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
