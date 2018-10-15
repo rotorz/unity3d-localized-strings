@@ -6,7 +6,7 @@
 const fs = require("fs");
 const glob = require("glob");
 const program = require('commander');
-const yaml = require("yaml").default;
+const yaml = require("js-yaml");
 
 
 program
@@ -16,13 +16,17 @@ program
   .parse(process.argv);
 
 
-glob(program.input + "/**/*.{prefab, asset, unity}", function (error, files) {
+glob(program.input + "/**/*.{prefab,asset,unity}", function (error, files) {
 
   // Step 1 - Extract and collate context and string from language components in asset files.
 
   let potMap = new Map();
 
   function registerString(context, value, file) {
+    if (value === undefined || value === null) {
+      return;
+    }
+
     context = context || "";
 
     let contextEntry = potMap.get(context);
@@ -42,18 +46,40 @@ glob(program.input + "/**/*.{prefab, asset, unity}", function (error, files) {
     stringEntry.references.add(file);
   }
 
-  for (let file of files) {
-    let fileContent = fs.readFileSync(file, { encoding: "utf8" });
-    let pattern = /xgettext:[^]+?value:[^]+?\n/g;
-    let match;
+  files.forEach(file => {
+    fs.readFileSync(file, { encoding: "utf8" })
+      .split(/--- !u![^]+?\n/)
+      .forEach((raw, index) => {
+        if (index === 0) {
+          return;
+        }
+        yaml.loadAll(raw, doc => {
+          recursiveFind(doc, xgettext => {
+            registerString(xgettext.context, xgettext.value, file);
+          });
+        });
+      });
+  });
 
-    while (true) {
-      match = pattern.exec(fileContent);
-      if (!match) {
-        break;
+  function recursiveFind(root, callback) {
+    if (!root) {
+      return;
+    }
+
+    if (Array.isArray(root)) {
+      root.forEach(element => {
+        recursiveFind(element, callback);
+      });
+    }
+    else if ((typeof root) === "object") {
+      for (let key of Object.keys(root)) {
+        if (key === "xgettext") {
+          callback(root[key]);
+        }
+        else {
+          recursiveFind(root[key], callback);
+        }
       }
-      let localizedString = yaml.parse(match[0]).xgettext;
-      registerString(localizedString.context, localizedString.value, file);
     }
   }
 
