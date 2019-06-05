@@ -86,7 +86,12 @@ glob(program.input + "/**/*.{prefab,asset,unity}", function (error, files) {
 
   // Step 2 - Format strings into a POT file.
 
-  let potOutput = "";
+  let potOutput = `# Asset strings
+#, fuzzy
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\\n"
+`;
 
   for (let [contextName, contextEntry] of potMap.entries()) {
     for (let [string, stringEntry] of contextEntry.entries()) {
